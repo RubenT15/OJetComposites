@@ -42,7 +42,7 @@ var employeeColors={
     "Andres":"yellow",
     "Pepe_Perez":"green"
 };
-setTimeout(function(){
+document.addEventListener("displayCalendar",function(){
     $(
         function(){
         
@@ -233,7 +233,7 @@ setTimeout(function(){
                 currentYear=currentDate.getFullYear();
                 currentMonth=currentDate.getMonth()+1
             }
-            var e=680;
+            var e=window.screen.width*0.9;
             var currentYear=2013;
             var currentMonth=9;
             var r=[];
@@ -258,5 +258,5 @@ setTimeout(function(){
                 if(e.attr("class").indexOf("left")!=-1){
                     r("previous")
                 }else{r("next")}
-            })});},200)
+            })});})
 
