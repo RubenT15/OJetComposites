@@ -109,7 +109,7 @@ document.addEventListener("displayCalendar",function(){
                 content_container.find(".today").css({"color":"goldenrod"});
                 
                 for(let worker of employees){
-                    content_container.find("."+worker.name).css({"background-color":employeeColors[worker.name],"position":"relative","display":"inline-block","float":"left","max-width":"100%"});
+                    content_container.find("."+worker.name).css({"background-color":employeeColors[worker.name],"position":"relative","display":"inline-block","float":"left","max-height":"100%","max-width":"100%"});
                 }
 
                 adjustSize();
@@ -158,7 +158,7 @@ document.addEventListener("displayCalendar",function(){
                     let childrenDiv=hijo.getElementsByTagName("div");
                     for(let div of childrenDiv){
                         console.log(div.style.width);
-                        div.style.width=100/(hijo.children.length-1)+"%";
+                        div.style.height=100/(hijo.children.length-1)+"%";
                     }
                     //console.log(100/hijo.children.length-1+"%")
                 }
