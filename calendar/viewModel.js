@@ -17,11 +17,30 @@ var employees=[
             "2019/4/23",
             "2019/4/24"
         ]
+    },
+    {
+        name:"Andres",
+        days:[
+            "2019/4/15",
+            "2019/4/23",
+            "2019/4/24"
+        ]
+    },
+    {
+        name:"Pepe_Perez",
+        days:[
+            "2019/4/15",
+            "2019/4/23",
+            "2019/4/24"
+        ]
     }
+    
 ];
 var employeeColors={
     "Ruben_Garcia_Tercero":"blue",
-    "David_Gonzalez":"red"
+    "David_Gonzalez":"red",
+    "Andres":"yellow",
+    "Pepe_Perez":"green"
 };
 setTimeout(function(){
     $(
@@ -90,8 +109,7 @@ setTimeout(function(){
                 content_container.find(".today").css({"color":"goldenrod"});
                 
                 for(let worker of employees){
-                    content_container.find("."+worker.name).css({"background-color":employeeColors[worker.name],"position":"relative","display":"inline-block","float":"left"});
-                    
+                    content_container.find("."+worker.name).css({"background-color":employeeColors[worker.name],"position":"relative","display":"inline-block","float":"left","max-width":"100%"});
                 }
 
                 adjustSize();
@@ -140,7 +158,7 @@ setTimeout(function(){
                     let childrenDiv=hijo.getElementsByTagName("div");
                     for(let div of childrenDiv){
                         console.log(div.style.width);
-                        div.style.width="100px";
+                        div.style.width=100/(hijo.children.length-1)+"%";
                     }
                     //console.log(100/hijo.children.length-1+"%")
                 }
@@ -215,7 +233,7 @@ setTimeout(function(){
                 currentYear=currentDate.getFullYear();
                 currentMonth=currentDate.getMonth()+1
             }
-            var e=480;
+            var e=680;
             var currentYear=2013;
             var currentMonth=9;
             var r=[];

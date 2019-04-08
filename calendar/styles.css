@@ -72,11 +72,13 @@ i[class^=icon-chevron]{
 }
 .checked span{
     z-index:100;
-    color:#787878;
-    display:inline-block;
+    color:black;
+    display:inline;
+    position:absolute;
 }
 .checked {
     text-align: center;
     overflow:hidden;
+    background-color: rgba(0,0,0,0)
 }
 
