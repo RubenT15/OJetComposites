@@ -3,7 +3,8 @@ define(['knockout', 'ojs/ojknockout', 'ojs/ojavatar'],
   function (ko) {
     function model (context){
         var self = this;
-
+        
+        console.log(context)
         self.composite = context.element;
         self.properties = context.properties;
 
@@ -11,7 +12,7 @@ define(['knockout', 'ojs/ojknockout', 'ojs/ojavatar'],
                 
             function(){
                 function c(){
-                    debugger
+                    
                     printDaysOfTheWeek();
                     var daysOfTheMonth=getDaysOfTheMonth();
                     var r=0;
@@ -58,10 +59,13 @@ define(['knockout', 'ojs/ojknockout', 'ojs/ojavatar'],
                                     if(!m) m="<div>";
                                     else m+='">';
                                 }
-                            content_container.append(m+""+"<span>"+v+"</span>"+"</div>");
+                            content_container.append(m+""+"<span style='position:relative;float:left;width:0;height:0;left:25%'>"+v+"</span>"+"</div>");
                             for(let worker of self.properties.employees){
                                 if(checkEmployeeVacation(new Date(currentYear,currentMonth-1,v),worker)){
-                                    content_container.find(".vacation").append('<div class="'+worker.name+'"></div>')     
+                                    if(worker.estado!="aprobado")
+                                        content_container.find(".vacation").append('<div class="'+worker.name+' pendiente"></div>')
+                                    else
+                                        content_container.find(".vacation").append('<div class="'+worker.name+'"></div>')
                                 }
                         }
                         content_container.find(".vacation").addClass('checked').removeClass('vacation');
@@ -71,12 +75,13 @@ define(['knockout', 'ojs/ojknockout', 'ojs/ojavatar'],
                     var y=coloursArray[currentMonth-1];
                     header_container.css("background-color",y).find("h1").text(monthsOfTheYear[currentMonth-1]+" "+currentYear);
                     weekdays_container.find("div").css("color",y);
-                    content_container.find(".today").css({"color":"goldenrod"});
+                    content_container.find(".today").css({"color":"goldenrod","opacity":"1"});
 
                     for(let worker of self.properties.employees){
-                        content_container.find("."+worker.name).css({"background-color":worker.color,"position":"relative","display":"inline-block","float":"left","max-height":"100%","max-width":"100%"});
+                        content_container.find("."+worker.name).css({"background-color":worker.color,"position":"relative","display":"inline-block",
+                            "float":"left","max-height":"100%","max-width":"100%"});     
                     }
-
+                    content_container.find(".pendiente").css({"border-left":"3px solid green"})
                     adjustSize();
                 }
                 /**
@@ -205,7 +210,6 @@ define(['knockout', 'ojs/ojknockout', 'ojs/ojavatar'],
                 var content_container=u.find("#calendar_content");
                 init_currentDate();
                 c();
-                console.log("esta funcionando");
                 header_container.find('i[class^="icon-chevron"]').on("click",function(){
                     var e=$(this);
                     var r=function(e){
