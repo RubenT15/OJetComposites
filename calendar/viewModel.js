@@ -4,11 +4,10 @@ define(['knockout', 'ojs/ojknockout', 'ojs/ojavatar'],
     function model (context){
         var self = this;
         
-        console.log(context)
         self.composite = context.element;
         self.properties = context.properties;
 
-        $(
+        function calendario(){$(
                 
             function(){
                 function c(){
@@ -62,9 +61,9 @@ define(['knockout', 'ojs/ojknockout', 'ojs/ojavatar'],
                             content_container.append(m+""+"<span style='position:relative;float:left;width:0;height:0;left:25%'>"+v+"</span>"+"</div>");
                             for(let worker of self.properties.employees){
                                 if(checkEmployeeVacation(new Date(currentYear,currentMonth-1,v),worker)){
-                                    if(worker.estado!="aprobado")
+                                    if(worker.estado=="pendiente")
                                         content_container.find(".vacation").append('<div class="'+worker.name+' pendiente"></div>')
-                                    else
+                                    else if(worker.estado=="aprobado")
                                         content_container.find(".vacation").append('<div class="'+worker.name+'"></div>')
                                 }
                         }
@@ -221,7 +220,12 @@ define(['knockout', 'ojs/ojknockout', 'ojs/ojavatar'],
                     if(e.attr("class").indexOf("left")!=-1){
                         r("previous")
                     }else{r("next")}
-                })});
+                })});}
+            calendario();
+            model.prototype.propertyChanged = function(context){
+                self.properties.employees=context.value;
+                calendario();
+            }
         }
 
     return model;
